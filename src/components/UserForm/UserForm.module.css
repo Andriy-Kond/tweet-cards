@@ -1,0 +1,33 @@
+.userFormWrapper {
+  display: flex;
+  flex-direction: column;
+
+  width: 400px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  gap: 20px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.formLabel {
+  margin-bottom: 5px;
+}
+
+.submitBtn {
+  width: 100px;
+  align-self: center;
+  background-color: transparent;
+  border: 1px solid grey;
+  border-radius: 3px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background-color: rgb(229, 226, 226);
+}
