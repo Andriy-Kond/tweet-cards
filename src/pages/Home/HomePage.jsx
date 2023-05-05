@@ -1,9 +1,7 @@
-import css from './Home.module.css';
-
-const Home = () => {
+const HomePage = () => {
   return (
     <div>
-      <h1 style={css.title}>
+      <h1>
         Task manager welcome page{' '}
         <span role="img" aria-label="Greeting icon">
           💁‍♀️
@@ -13,4 +11,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

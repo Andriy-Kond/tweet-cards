@@ -1,64 +1,24 @@
-// ^ З використанням localStorage:
+// ^ Без використання localStorage:
 import { configureStore } from '@reduxjs/toolkit';
+import sliceFilterReducer from './filterSlice';
+import { tweetsAPI } from './tweetsApi';
 
-// імпорт при default-експорті дозволяє називати змінну як завгодно:
-import sliceFilterReducer from './phonebook/sliceFilter';
-import sliceContactsReducer from './phonebook/sliceContacts';
-import sliceAuthReducer from './auth/sliceAuth';
+// ~ Для RTKQuery в Store передаємо ще один middleware, а редюсер передаємо трохи по-іншому
 
-import {
-  persistStore,
-  persistReducer,
-  // ~ Додаткові константи, щоби позбутись помилки у консолі - необхідні для роботи Redux-Persist
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
-
-// Додатковий імпорт згідно документації для роботи з localStorage:
-import storage from 'redux-persist/lib/storage';
-
-// * Для роботи з бекендом вже немає необхідності юзати локалсторидж для контактів:
-// // Об'являю спеціальне Redux-Persist сховище (спеціальний localStorage):
-// const contactsPersistConfig = {
-//   key: 'root', // ключ, необхідний для того, щоб можна було створювати декілька таких сховищ (вкладених???)
-//   storage, // storage: storage, - це storage з імпорту: import storage from 'redux-persist/lib/storage';
-//   whitelist: ['stateContacts'], // дозволяю зберігати у локальному сховищі тільки це
-// };
-
-const authPersistConfig = {
-  key: 'auth',
-  storage,
-  whitelist: ['token'], // дозволяю зберігати у локальному сховищі тільки цей ключ з цілого об'єкту sliceAuth.initialState
-};
-
-// ~ Додатковий middleware, щоби позбутись помилки у консолі - необхідно для роботи Redux-Persist
-const middleware = getDefaultMiddleware =>
-  getDefaultMiddleware({
-    // якісь перевірки для серилізації:
-    serializableCheck: {
-      // якісь екшени, які будуть ігноруватись:
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  });
-
-// Глобальний стор Redux виношу у окрему змінну:
-const storeRedux = configureStore({
+export default configureStore({
   reducer: {
-    // storeContacts: persistReducer(contactsPersistConfig, sliceContactsReducer),
-    storeAuth: persistReducer(authPersistConfig, sliceAuthReducer),
-    storeContacts: sliceContactsReducer,
+    // Задаємо будь-яке ім'я, бо був export default:
     storeFilter: sliceFilterReducer,
+
+    // Додавання редюсера через RTK Query трохи по-іншому:
+    [tweetsAPI.reducerPath]: tweetsAPI.reducer,
   },
 
-  // ~ Додатковий middleware, щоби позбутись помилки у консолі - необхідно для роботи Redux-Persist
-  middleware, // middleware: middleware,
+  // Для RTK Query потрібен додатковий middleware:
+  // middleware взагалі є масивом. Тому треба робити concat для того, щоб додати додатковий middleware з RTKQueryApi до цього основного масиву
+  // getDefaultMiddleware - спеціальний метод
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(tweetsAPI.middleware),
+  // розпушувати масив не рекомендується, бо деякі компоненти з попередніх трьох middleware, які під капотом можуть втратитись.
+  // Тому Redux просить ось так НЕ робити: middleware: getDefaultMiddleware => [...getDefaultMiddleware(), RTKQueryApi.middleware]
 });
-
-// Пов'язую створене Redux-Persist сховище з глобальним Redux стором:
-export const persister = persistStore(storeRedux); // Маю передати його до компоненту <PersistGate> у кореневому index.js
-
-export default storeRedux;
