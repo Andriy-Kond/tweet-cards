@@ -2,3 +2,4 @@
 // export const selectIsLoading = store => store.storeAsyncThunk.isLoading;
 // export const selectError = store => store.storeAsyncThunk.error;
 export const selectFilter = store => store.storeFilter.stateFilter; // Contacts.jsx, Filter.jsx
+export const selectUserKey = store => store.storeUserKey.stateUserKey;

@@ -5,6 +5,7 @@ import css from './TweetsPage.module.css';
 // import { useDeleteContactMutation } from 'store/contactsRTKQueryApi';
 
 export function MarkupTweets(props) {
+  // console.log('MarkupTweets >> props:', props);
   // * При використанні RTK Query:
   // & Хуки Query-запиту повертають об'єкт
   // const data = useGetTweetsQuery();

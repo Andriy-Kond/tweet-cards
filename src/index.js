@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import store from './redux/indexStore';
+import store, { persister } from './redux/indexStore';
 
 import { App } from 'App';
 import './index.css';
 import './styles/modern-normalize.css';
 import './styles/project-normalize.css';
+// Для використання localStorage:
+import { PersistGate } from 'redux-persist/integration/react';
 
 // Для підключення Redux треба огорнути застосунок у Provider:
 
@@ -14,6 +16,7 @@ import './styles/project-normalize.css';
 
 import Notiflix from 'notiflix';
 import { Provider } from 'react-redux';
+import { BigPreLoader } from 'Layout/Preloader/PreLoader';
 
 Notiflix.Notify.init({
   position: 'center-top',
@@ -37,12 +40,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     {/* Огортаємо App в Provider, щоби у App був доступ до store */}
     <Provider store={store}>
       {/* Огортаємо App в PersistGate для роботи з localStorage */}
-      {/* <PersistGate loading={<BigPreLoader />} persistor={persister}> */}
-      {/* basename="/goit-react-hw-05-movies" - необхідно для збиральника проєкту */}
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-      {/* </PersistGate> */}
+      <PersistGate loading={<BigPreLoader />} persistor={persister}>
+        {/* basename="/goit-react-hw-05-movies" - необхідно для збиральника проєкту */}
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

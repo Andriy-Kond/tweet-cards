@@ -8,9 +8,9 @@ import css from './TweetsPage.module.css';
 
 const TweetsPage = () => {
   const { data: tweets } = useGetUsersQuery();
-  console.log('TweetsPage >> tweets:', tweets);
+  // console.log('TweetsPage >> tweets:', tweets);
   const filter = useSelector(selectFilter);
-  console.log('TweetsPage >> filter:', filter);
+  // console.log('TweetsPage >> filter:', filter);
 
   // Фільтрація твітів:
   const filteredTweets = filter
@@ -19,7 +19,7 @@ const TweetsPage = () => {
       )
     : tweets;
 
-  console.log('TweetsPage >> filteredTweets:', filteredTweets);
+  // console.log('TweetsPage >> filteredTweets:', filteredTweets);
 
   return (
     <div>
@@ -30,7 +30,7 @@ const TweetsPage = () => {
         <>
           <ul className={css.list}>
             {filteredTweets.map(({ id, ...props }) => {
-              return <MarkupTweets key={id} {...props}></MarkupTweets>;
+              return <MarkupTweets key={id} id={id} {...props}></MarkupTweets>;
             })}
           </ul>
         </>
