@@ -35,7 +35,7 @@ const TweetsPage = () => {
     dispatch(setUsersCards(usersCardsTweets));
   }, [dispatch, usersCardsTweets]);
   const usersCards = useSelector(selectUsersCards); // збережені картки
-  const usersId = useSelector(selectUserKey);
+  // const usersId = useSelector(selectUserKey);
   // console.log('TweetsPage >> usersId:', usersId);
   // console.log('TweetsPage >> tweets:', tweets);
 

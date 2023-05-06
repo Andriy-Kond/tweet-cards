@@ -1,11 +1,7 @@
 import css from './TweetsPage.module.css';
 import { MarkupTweets } from './MarkupTweets';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectUserKey,
-  selectUsersCards,
-  selectUsersFilter,
-} from 'redux/selectors';
+import { selectUsersCards, selectUsersFilter } from 'redux/selectors';
 import { useGetUsersQuery, useUpdateTweetMutation } from 'redux/tweetsApi';
 import { setUsersCards, setUsersFilter } from 'redux/sliceUserKey';
 import { useEffect, useState } from 'react';
@@ -16,7 +12,8 @@ const TweetsPage = () => {
   const dispatch = useDispatch();
   const { data: usersCardsTweets, isLoading } = useGetUsersQuery(); // запит карток
 
-  const [updateTweet, obj] = useUpdateTweetMutation();
+  // const [updateTweet, obj] = useUpdateTweetMutation();
+  const [updateTweet] = useUpdateTweetMutation();
 
   const [currentPage, setCurrentPage] = useState(1); // поточна сторінка
   const [cardsPerPage] = useState(2); // карток на сторінку
@@ -26,7 +23,7 @@ const TweetsPage = () => {
     dispatch(setUsersCards(usersCardsTweets));
   }, [dispatch, usersCardsTweets]);
   const usersCards = useSelector(selectUsersCards); // збережені картки
-  const usersId = useSelector(selectUserKey);
+  // const usersId = useSelector(selectUserKey);
 
   // Пагінація
   const lastIndex = currentPage * cardsPerPage; // оастанній індекс
