@@ -23,7 +23,7 @@ import persistReducer from 'redux-persist/es/persistReducer';
 const userKeyPersistConfig = {
   key: 'userKey',
   storage,
-  whitelist: ['stateUserKey'], // дозволяю зберігати у локальному сховищі тільки цей ключ з цілого об'єкту sliceAuth.initialState
+  // whitelist: ['stateUserKey'], // дозволяю зберігати у локальному сховищі тільки цей ключ з цілого об'єкту sliceAuth.initialState
 };
 
 // ~ Для RTKQuery в Store передаємо ще один middleware, а редюсер передаємо трохи по-іншому

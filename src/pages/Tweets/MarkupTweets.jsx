@@ -1,47 +1,44 @@
-// import PropTypes from 'prop-types';
-import UserCard from 'components/UserCard/UserCard';
 import css from './TweetsPage.module.css';
+import Card from 'react-bootstrap/Card';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import { useDeleteContactMutation } from 'store/contactsRTKQueryApi';
+import { toggleUserKey } from 'redux/sliceUserKey';
+import { selectUserKey } from 'redux/selectors';
 
 export function MarkupTweets(props) {
-  // console.log('MarkupTweets >> props:', props);
-  // * При використанні RTK Query:
-  // & Хуки Query-запиту повертають об'єкт
-  // const data = useGetTweetsQuery();
-  // console.log('UserForm >> data:', data);
-  // const { isLoading, data: contacts, isError } = useGetContactsQuery();
+  const { user, avatar, followers, tweets, id, updateTweet } = props;
 
-  // & Хуки Mutation-запитів повертають масив
-  // const [deleteContact, delInfo] = useDeleteContactMutation();
-  // console.log('MarkupContacts >> delInfo:', delInfo);
-  // delInfo - це об'єкт
+  const increment = tweets => tweets + 1;
+  const decrement = tweets => tweets - 1;
 
-  // const handleDeleteContact = async () => {
-  //   const del = await deleteContact(id);
-  //   console.log('handleDeleteContact >> del.data:', del.data);
-  //   return del;
-  // };
+  const isExist = useSelector(selectUserKey);
+  const dispatch = useDispatch();
+  const toggleFollow = async () => {
+    dispatch(toggleUserKey(id));
+
+    if (isExist.includes(id)) {
+      increment();
+    } else {
+      decrement();
+    }
+
+    await updateTweet(...props, tweets);
+  };
 
   return (
     <li className={css.listItem}>
-      <UserCard
-        {...props}
-        // user={user}
-        // avatar={avatar}
-        // followers={followers}
-        // tweets={tweets}
-        // id={id}
-      />
-      {/* <button className={css.deleteBtn} onClick={handleDeleteContact}>
-        {delInfo.isLoading ? <b>Deleting...</b> : 'Delete'}
-      </button> */}
+      <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={avatar} />
+        <Card.Body>
+          <Card.Title>User {user}</Card.Title>
+          <Card.Title>{tweets} TWEETS</Card.Title>
+          <Card.Text>{followers} FOLLOWERS</Card.Text>
+          {/* <Button variant="primary">FOLLOW</Button> */}
+          <button type="button" onClick={toggleFollow}>
+            {isExist.includes(id) ? 'FOLLOWING' : 'FOLLOW'}
+          </button>
+        </Card.Body>
+      </Card>
     </li>
   );
 }
-
-// MarkupContacts.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   number: PropTypes.string.isRequired,
-//   id: PropTypes.string.isRequired,
-// };

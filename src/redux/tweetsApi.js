@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 // Store і Reducer потрібні
 // productsApi = createApi
 export const tweetsAPI = createApi({
-  reducerPath: 'RTKQueryContacts', // те саме, що і у createSlice властивість name: 'fetchContacts',
+  reducerPath: 'fetchTweets', // те саме, що і у createSlice властивість name: 'fetchContacts',
   baseQuery: fetchBaseQuery({
     //fetchBaseQuery - спеціальний метод, якому ми передаємо baseUrl
     baseUrl: 'https://6454a8f5a74f994b33457e38.mockapi.io/', // з fetch.js
@@ -23,21 +23,25 @@ export const tweetsAPI = createApi({
       // Ось це і все замість createAsyncThunk, initialState, sliceAsyncThunk(createSlice), addCase
 
       // providesTags: ['tweetsSubscribe'], // підписується на запит
-      providesTags: result =>
-        result
+      providesTags: result => {
+        // console.log('result:', result.length);
+
+        return result
           ? [
               ...result.map(({ id }) => ({ type: 'tweetsSubscribe', id })),
+
               { type: 'tweetsSubscribe', id: 'LIST' },
             ]
-          : [{ type: 'tweetsSubscribe', id: 'LIST' }],
+          : [{ type: 'tweetsSubscribe', id: 'LIST' }];
+      },
     }),
 
-    // addTweet: builder.mutation({
-    //   query: newTweet => {
-    //     return { url: 'contacts', method: 'POST', body: newTweet };
-    //   },
-    //   invalidatesTags: [{ type: 'tweetsSubscribe', id: 'LIST' }],
-    // }),
+    updateTweet: builder.mutation({
+      query: data => {
+        return { url: `/users/${data.id}`, method: 'PUT', body: data };
+      },
+      invalidatesTags: [{ type: 'tweetsSubscribe', id: 'LIST' }],
+    }),
 
     // deleteTweet: builder.mutation({
     //   query: idTweet => ({ url: `/contacts/${idTweet}`, method: 'DELETE' }),
@@ -47,7 +51,7 @@ export const tweetsAPI = createApi({
 });
 
 // Експортуються хуки, які формуються з RTK Query на базі назви: перед назвою додається use, назва з великої букви, а після назви додається Query або Mutation:
-export const { useGetUsersQuery } = tweetsAPI;
+export const { useGetUsersQuery, useUpdateTweetMutation } = tweetsAPI;
 // export const { useGetUsersQuery, useAddTweetMutation, useDeleteTweetMutation } =
 //   tweetsAPI;
 

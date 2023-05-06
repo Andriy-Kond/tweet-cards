@@ -1,5 +1,6 @@
 import css from './TweetsPage.module.css';
 import { MarkupTweets } from './MarkupTweets';
+
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectUserKey,
@@ -16,7 +17,15 @@ const TweetsPage = () => {
   const dispatch = useDispatch();
   const { data: usersCardsTweets, isLoading } = useGetUsersQuery(); // запит карток
 
+  // Першим параметром масиву від Mutation буде функція, яку ми викликаємо щоби видалити, створити, змінити і т.і. А другим параметром буде об'єкт, в якому приблизно ті ж дані, щ оє в об'єкті, який повертає хук з Query (isLoading, data, isError і т.і.)
   const [updateTweet, obj] = useUpdateTweetMutation();
+
+  const updateTweetFunction = async newQtyTweets => {
+    await updateTweet({
+      tweets: newQtyTweets,
+      ...obj,
+    });
+  };
 
   const [currentPage, setCurrentPage] = useState(1); // поточна сторінка
   const [cardsPerPage] = useState(2); // карток на сторінку
@@ -27,17 +36,70 @@ const TweetsPage = () => {
   }, [dispatch, usersCardsTweets]);
   const usersCards = useSelector(selectUsersCards); // збережені картки
   const usersId = useSelector(selectUserKey);
+  // console.log('TweetsPage >> usersId:', usersId);
+  // console.log('TweetsPage >> tweets:', tweets);
+
+  // console.log('usersId[0] :>> ', usersId[0]);
+
+  // const filtered = tweets.filter(tweet => {
+  //   for (let i = 0; i < usersId.length; i++) {
+  //     if (tweet.id === usersId[i]) {
+  //       return tweet.id;
+  //     }
+  //   }
+  // });
 
   // Пагінація
   const lastIndex = currentPage * cardsPerPage; // оастанній індекс
   const firstIndex = lastIndex - cardsPerPage; // перший індекс
-  const currentCards = usersCards?.slice(firstIndex, lastIndex); // картки поточної сторінки
+  const currentCard = usersCards?.slice(firstIndex, lastIndex); // картки поточної сторінки
+  // if (usersCards) {
+  //   console.log('TweetsPage >> firstIndex:', firstIndex);
+  //   console.log('TweetsPage >> lastIndex:', lastIndex);
+  //   console.log('TweetsPage >> currentCard:', currentCard);
+  // }
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
   const nextPage = () => setCurrentPage(prevState => prevState + 1);
   const prevPage = () => setCurrentPage(prevState => prevState - 1);
 
+  // Фільтрація твітів
+  //  todo Dropdown із 3 опціями(оформлення на ваш розсуд): show all, follow, followings
+  // const filteredTweets = filter
+  //   ? tweets.filter(tweet =>
+  //       tweet.user.toLowerCase().includes(filter.toLowerCase())
+  //     )
+  //   : tweets;
+
+  //   return (
+  //     <div>
+  //       <h1>Це сторінка твітів</h1>
+  //       <Filter />
+  //       {isLoading ? (
+  //         <BigPreLoader />
+  //       ) : (
+  //         filteredTweets?.length > 0 && (
+  //           <>
+  //             <ul className={css.list}>
+  //               {filteredTweets.map(({ id, ...props }) => {
+  //                 return (
+  //                   <MarkupTweets key={id} id={id} {...props}></MarkupTweets>
+  //                 );
+  //               })}
+  //             </ul>
+  //             <PaginationList
+  //               cardsPerPage={cardsPerPage}
+  //               totalCards={tweets.length}
+  //             />
+  //           </>
+  //         )
+  //       )}
+  //     </div>
+  //   );
+  // };
+
   //  Фільтрація по dropDown show all, follow, followings
+
   const setFilter = e => {
     const tag = e.target.dataset.id;
     dispatch(setUsersFilter(tag));
@@ -80,15 +142,15 @@ const TweetsPage = () => {
       {isLoading ? (
         <BigPreLoader />
       ) : (
-        currentCards?.length > 0 && (
+        currentCard?.length > 0 && (
           <>
             <ul className={css.list}>
-              {currentCards.map(({ id, ...props }) => {
+              {currentCard.map(({ id, ...props }) => {
                 return (
                   <MarkupTweets
                     key={id}
                     id={id}
-                    updateTweet={updateTweet}
+                    updateTweetFunction={updateTweetFunction}
                     {...props}
                   ></MarkupTweets>
                 );

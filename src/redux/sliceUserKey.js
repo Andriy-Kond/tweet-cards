@@ -5,11 +5,13 @@ const sliceUserKey = createSlice({
 
   initialState: {
     stateUserKey: [],
+    stateUsersCards: [],
+    stateUsersFilter: 'all',
   },
 
   reducers: {
     toggleUserKey(state, action) {
-      console.log('toggleUserKey >> action:', action);
+      // console.log('toggleUserKey >> action:', action);
       const isExist = state.stateUserKey.find(
         contact => contact === action.payload
       );
@@ -23,17 +25,17 @@ const sliceUserKey = createSlice({
       }
     },
 
-    setUserKey(state, action) {
-      state.stateUserKey.push(action.payload);
+    setUsersCards(state, action) {
+      state.stateUsersCards = action.payload;
     },
-    unSetUserKey(state, action) {
-      state.stateUserKey = state.stateUserKey.filter(
-        contact => contact.id !== action.payload
-      );
+
+    setUsersFilter(state, action) {
+      state.stateUsersFilter = action.payload;
     },
   },
 });
 
-export const { setUserKey, unSetUserKey, toggleUserKey } = sliceUserKey.actions;
+export const { toggleUserKey, setUsersCards, setUsersFilter } =
+  sliceUserKey.actions;
 
 export default sliceUserKey.reducer;
