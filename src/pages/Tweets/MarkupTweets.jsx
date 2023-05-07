@@ -9,27 +9,30 @@ import { useState } from 'react';
 export function MarkupTweets(props) {
   const { user, avatar, followers, tweets, id, updateTweet } = props;
 
-  // const [followers, setFollowers] = useState(currentFollowers);
+  const PRIMARY_COLOR = 'blue';
+  const SECONDARY_COLOR = 'red';
 
   const isExist = useSelector(selectUserKey);
+  const [btnColor, setBtnColor] = useState(
+    isExist.includes(id) ? SECONDARY_COLOR : PRIMARY_COLOR
+  );
   const dispatch = useDispatch();
 
   const toggleFollow = followers => {
     dispatch(toggleUserKey(id));
 
-    console.log('toggleFollow >> followers:', followers);
-
     if (isExist.includes(id)) {
       followers = followers - 1;
-      // setFollowers(followers - 1);
+      setBtnColor(PRIMARY_COLOR);
     } else {
       followers = followers + 1;
-      // setFollowers(followers + 1);
+      setBtnColor(SECONDARY_COLOR);
     }
 
     updateTweet({ user, avatar, followers, tweets, id });
-    console.log('followers :>> ', followers);
   };
+
+  const numberOptions = { style: 'decimal', minimumFractionDigits: 0 };
 
   return (
     <li className={css.listItem}>
@@ -38,10 +41,13 @@ export function MarkupTweets(props) {
         <Card.Body>
           <Card.Title>User {user}</Card.Title>
           <Card.Title>{tweets} TWEETS</Card.Title>
-          <Card.Text>{followers} FOLLOWERS</Card.Text>
+          <Card.Text>
+            {followers.toLocaleString('en-US', numberOptions)} FOLLOWERS
+          </Card.Text>
           {/* <Button variant="primary">FOLLOW</Button> */}
           <button
             type="button"
+            style={{ backgroundColor: btnColor }}
             onClick={() => {
               toggleFollow(followers);
             }}
