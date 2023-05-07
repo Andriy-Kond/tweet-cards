@@ -1,26 +1,53 @@
 import css from './TweetsPage.module.css';
 import Card from 'react-bootstrap/Card';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { toggleUserKey } from 'redux/sliceUserKey';
-import { selectUserKey } from 'redux/selectors';
+import {
+  setCurrentPage,
+  setFilteredTweets,
+  setUsersFilter,
+  toggleUserSubscribe,
+} from 'redux/sliceUserKey';
+import {
+  selectCurrentPage,
+  selectFilteredTweets,
+  selectUserKeys,
+  selectUsersFilter,
+} from 'redux/selectors';
 import { useState } from 'react';
+import {
+  FOLLOW,
+  FOLLOWING,
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+} from 'Services/variables';
+import { useGetUsersQuery, useUpdateTweetMutation } from 'redux/tweetsApi';
+import { useEffect } from 'react';
 
 export function MarkupTweets(props) {
-  const { user, avatar, followers, tweets, id, updateTweet } = props;
+  const {
+    user,
+    avatar,
+    followers,
+    tweets,
+    id,
+    // filtering
+  } = props;
+  const currentPage = useSelector(selectCurrentPage);
+  const [updateTweet] = useUpdateTweetMutation();
+  const dispatch = useDispatch();
 
-  const PRIMARY_COLOR = 'blue';
-  const SECONDARY_COLOR = 'red';
-
-  const isExist = useSelector(selectUserKey);
+  const userFilter = useSelector(selectUsersFilter);
+  const isExist = useSelector(selectUserKeys);
   const [btnColor, setBtnColor] = useState(
     isExist.includes(id) ? SECONDARY_COLOR : PRIMARY_COLOR
   );
-  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(setFilteredTweets(selectFilteredTweets));
+  // }, [dispatch, userFilter]);
 
   const toggleFollow = followers => {
-    dispatch(toggleUserKey(id));
-
+    dispatch(toggleUserSubscribe(id));
     if (isExist.includes(id)) {
       followers = followers - 1;
       setBtnColor(PRIMARY_COLOR);
@@ -29,6 +56,10 @@ export function MarkupTweets(props) {
       setBtnColor(SECONDARY_COLOR);
     }
 
+    dispatch(setFilteredTweets());
+    // const filteredTweets = filtering(userFilter);
+    // dispatch(setFilteredTweets(filteredTweets));
+    // dispatch(setCurrentPage(currentPage));
     updateTweet({ user, avatar, followers, tweets, id });
   };
 
@@ -52,7 +83,9 @@ export function MarkupTweets(props) {
               toggleFollow(followers);
             }}
           >
-            {isExist.includes(id) ? 'FOLLOWING' : 'FOLLOW'}
+            {isExist.includes(id)
+              ? FOLLOWING.toUpperCase()
+              : FOLLOW.toUpperCase()}
           </button>
         </Card.Body>
       </Card>

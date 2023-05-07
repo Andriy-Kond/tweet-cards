@@ -1,7 +1,8 @@
-// export const selectContacts = store => store.storeAsyncThunk.stateContacts;
-// export const selectIsLoading = store => store.storeAsyncThunk.isLoading;
-// export const selectError = store => store.storeAsyncThunk.error;
-export const selectFilter = store => store.storeFilter.stateFilter; // Contacts.jsx, Filter.jsx
-export const selectUserKey = store => store.storeUserKey.stateUserKey;
-export const selectUsersCards = store => store.storeUserKey.stateUsersCards;
+// export const selectFilter = store => store.storeFilter.stateFilter; // Contacts.jsx, Filter.jsx
+
+export const selectUserKeys = store => store.storeUserKey.stateUserKeys;
+export const selectFilteredTweets = store =>
+  store.storeUserKey.stateFilteredTweets;
+export const selectAllTweets = store => store.storeUserKey.stateAllTweets;
 export const selectUsersFilter = store => store.storeUserKey.stateUsersFilter;
+export const selectCurrentPage = store => store.storeUserKey.stateCurrentPage;

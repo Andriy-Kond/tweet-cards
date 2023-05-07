@@ -4,11 +4,11 @@ import { MarkupTweets } from './MarkupTweets';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectUserKey,
-  selectUsersCards,
+  selectFilteredTweets,
   selectUsersFilter,
 } from 'redux/selectors';
 import { useGetUsersQuery, useUpdateTweetMutation } from 'redux/tweetsApi';
-import { setUsersCards, setUsersFilter } from 'redux/sliceUserKey';
+import { setFilteredTweets, setUsersFilter } from 'redux/sliceUserKey';
 import { useEffect, useState } from 'react';
 import { BigPreLoader } from 'Layout/Preloader/PreLoader';
 import PaginationList from 'Layout/PaginationList/PaginationList';
@@ -32,10 +32,10 @@ const TweetsPage = () => {
 
   // Оновлення стану (встановлення карток локально)
   useEffect(() => {
-    dispatch(setUsersCards(usersCardsTweets));
+    dispatch(setFilteredTweets(usersCardsTweets));
   }, [dispatch, usersCardsTweets]);
-  const usersCards = useSelector(selectUsersCards); // збережені картки
-  // const usersId = useSelector(selectUserKey);
+  const usersCards = useSelector(selectFilteredTweets); // збережені картки
+  const usersId = useSelector(selectUserKey);
   // console.log('TweetsPage >> usersId:', usersId);
   // console.log('TweetsPage >> tweets:', tweets);
 

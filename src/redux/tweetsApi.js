@@ -38,7 +38,7 @@ export const tweetsAPI = createApi({
 
     updateTweet: builder.mutation({
       query: data => {
-        console.log('data:', data);
+        // console.log('data:', data);
         return { url: `/users/${data.id}`, method: 'PUT', body: data };
       },
       invalidatesTags: ['tweetsSubscribe'],

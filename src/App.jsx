@@ -2,7 +2,6 @@ import PublicRoute from 'Layout/PublicRoute/PublicRoute';
 import { SharedLayout } from 'Layout/SharedLayout';
 import HomePage from 'pages/Home/HomePage';
 import { lazy } from 'react';
-// import { TweetsPage } from 'pages/Tweets/TweetsPage';
 
 import { Route, Routes } from 'react-router-dom';
 

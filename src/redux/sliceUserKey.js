@@ -1,41 +1,83 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ALL, FOLLOW, FOLLOWING } from 'Services/variables';
 
 const sliceUserKey = createSlice({
   name: 'userKey',
 
   initialState: {
-    stateUserKey: [],
-    stateUsersCards: [],
-    stateUsersFilter: 'all',
+    stateUserKeys: [], // id
+    stateAllTweets: [],
+    stateFilteredTweets: [], // filtered tweets
+    stateUsersFilter: ALL,
+    stateCurrentPage: 1,
   },
 
   reducers: {
-    toggleUserKey(state, action) {
-      // console.log('toggleUserKey >> action:', action);
-      const isExist = state.stateUserKey.find(
+    toggleUserSubscribe(state, action) {
+      const isExist = state.stateUserKeys.find(
         contact => contact === action.payload
       );
 
       if (isExist) {
-        state.stateUserKey = state.stateUserKey.filter(
+        state.stateUserKeys = state.stateUserKeys.filter(
           contact => contact !== action.payload
         );
       } else {
-        state.stateUserKey.push(action.payload);
+        state.stateUserKeys.push(action.payload);
       }
     },
 
-    setUsersCards(state, action) {
-      state.stateUsersCards = action.payload;
+    setFilteredTweets(state, action) {
+      switch (state.stateUsersFilter) {
+        case FOLLOWING:
+          state.stateFilteredTweets = state.stateAllTweets.filter(tweet =>
+            state.stateUserKeys.includes(tweet.id)
+          );
+          break;
+        case FOLLOW:
+          state.stateFilteredTweets = state.stateAllTweets.filter(
+            tweet => !state.stateUserKeys.includes(tweet.id)
+          );
+          break;
+        case ALL:
+          state.stateFilteredTweets = state.stateAllTweets;
+          break;
+        default:
+          break;
+      }
+
+      // state.stateFilteredTweets = action.payload;
+    },
+
+    setAllTweets(state, action) {
+      state.stateAllTweets = action.payload;
     },
 
     setUsersFilter(state, action) {
       state.stateUsersFilter = action.payload;
     },
+
+    setCurrentPage(state, action) {
+      state.stateCurrentPage = action.payload;
+    },
+
+    incrementPage: state => {
+      state.stateCurrentPage += 1;
+    },
+    decrementPage: state => {
+      state.stateCurrentPage -= 1;
+    },
   },
 });
 
-export const { toggleUserKey, setUsersCards, setUsersFilter } =
-  sliceUserKey.actions;
+export const {
+  toggleUserSubscribe,
+  setFilteredTweets,
+  setAllTweets,
+  setUsersFilter,
+  setCurrentPage,
+  incrementPage,
+  decrementPage,
+} = sliceUserKey.actions;
 
 export default sliceUserKey.reducer;
