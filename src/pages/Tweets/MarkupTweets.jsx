@@ -4,25 +4,31 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { toggleUserKey } from 'redux/sliceUserKey';
 import { selectUserKey } from 'redux/selectors';
+import { useState } from 'react';
 
 export function MarkupTweets(props) {
   const { user, avatar, followers, tweets, id, updateTweet } = props;
 
-  const increment = tweets => tweets + 1;
-  const decrement = tweets => tweets - 1;
+  // const [followers, setFollowers] = useState(currentFollowers);
 
   const isExist = useSelector(selectUserKey);
   const dispatch = useDispatch();
-  const toggleFollow = async () => {
+
+  const toggleFollow = followers => {
     dispatch(toggleUserKey(id));
 
+    console.log('toggleFollow >> followers:', followers);
+
     if (isExist.includes(id)) {
-      increment();
+      followers = followers - 1;
+      // setFollowers(followers - 1);
     } else {
-      decrement();
+      followers = followers + 1;
+      // setFollowers(followers + 1);
     }
 
-    await updateTweet(...props, tweets);
+    updateTweet({ user, avatar, followers, tweets, id });
+    console.log('followers :>> ', followers);
   };
 
   return (
@@ -34,7 +40,12 @@ export function MarkupTweets(props) {
           <Card.Title>{tweets} TWEETS</Card.Title>
           <Card.Text>{followers} FOLLOWERS</Card.Text>
           {/* <Button variant="primary">FOLLOW</Button> */}
-          <button type="button" onClick={toggleFollow}>
+          <button
+            type="button"
+            onClick={() => {
+              toggleFollow(followers);
+            }}
+          >
             {isExist.includes(id) ? 'FOLLOWING' : 'FOLLOW'}
           </button>
         </Card.Body>

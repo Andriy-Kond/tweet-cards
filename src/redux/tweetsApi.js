@@ -22,25 +22,27 @@ export const tweetsAPI = createApi({
       query: () => '/users', // Функція має повертати рядок запиту
       // Ось це і все замість createAsyncThunk, initialState, sliceAsyncThunk(createSlice), addCase
 
-      // providesTags: ['tweetsSubscribe'], // підписується на запит
-      providesTags: result => {
-        // console.log('result:', result.length);
+      providesTags: ['tweetsSubscribe'], // підписується на запит
+      // providesTags: result => {
+      //   // console.log('result:', result.length);
 
-        return result
-          ? [
-              ...result.map(({ id }) => ({ type: 'tweetsSubscribe', id })),
+      //   return result
+      //     ? [
+      //         ...result.map(({ id }) => ({ type: 'tweetsSubscribe', id })),
 
-              { type: 'tweetsSubscribe', id: 'LIST' },
-            ]
-          : [{ type: 'tweetsSubscribe', id: 'LIST' }];
-      },
+      //         { type: 'tweetsSubscribe', id: 'LIST' },
+      //       ]
+      //     : [{ type: 'tweetsSubscribe', id: 'LIST' }];
+      // },
     }),
 
     updateTweet: builder.mutation({
       query: data => {
+        console.log('data:', data);
         return { url: `/users/${data.id}`, method: 'PUT', body: data };
       },
-      invalidatesTags: [{ type: 'tweetsSubscribe', id: 'LIST' }],
+      invalidatesTags: ['tweetsSubscribe'],
+      // invalidatesTags: [{ type: 'tweetsSubscribe', id: 'LIST' }],
     }),
 
     // deleteTweet: builder.mutation({
