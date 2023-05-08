@@ -5,11 +5,12 @@ const sliceUserKey = createSlice({
   name: 'userKey',
 
   initialState: {
-    stateUserKeys: [], // id
+    stateUserKeys: [],
     stateAllTweets: [],
-    stateFilteredTweets: [], // filtered tweets
+    stateFilteredTweets: [],
     stateUsersFilter: ALL,
     stateCurrentPage: 1,
+    stateTotalPages: 1,
   },
 
   reducers: {
@@ -27,17 +28,23 @@ const sliceUserKey = createSlice({
       }
     },
 
-    setFilteredTweets(state, action) {
+    setFilteredTweets(state) {
       switch (state.stateUsersFilter) {
         case FOLLOWING:
-          state.stateFilteredTweets = state.stateAllTweets.filter(tweet =>
-            state.stateUserKeys.includes(tweet.id)
-          );
+          state.stateFilteredTweets =
+            state.stateAllTweets?.length > 0
+              ? state.stateAllTweets.filter(tweet =>
+                  state.stateUserKeys.includes(tweet.id)
+                )
+              : [];
           break;
         case FOLLOW:
-          state.stateFilteredTweets = state.stateAllTweets.filter(
-            tweet => !state.stateUserKeys.includes(tweet.id)
-          );
+          state.stateFilteredTweets =
+            state.stateAllTweets?.length > 0
+              ? state.stateAllTweets.filter(
+                  tweet => !state.stateUserKeys.includes(tweet.id)
+                )
+              : [];
           break;
         case ALL:
           state.stateFilteredTweets = state.stateAllTweets;
@@ -45,8 +52,6 @@ const sliceUserKey = createSlice({
         default:
           break;
       }
-
-      // state.stateFilteredTweets = action.payload;
     },
 
     setAllTweets(state, action) {
@@ -67,6 +72,10 @@ const sliceUserKey = createSlice({
     decrementPage: state => {
       state.stateCurrentPage -= 1;
     },
+
+    setTotalPages(state, action) {
+      state.stateTotalPages = action.payload;
+    },
   },
 });
 
@@ -78,6 +87,7 @@ export const {
   setCurrentPage,
   incrementPage,
   decrementPage,
+  setTotalPages,
 } = sliceUserKey.actions;
 
 export default sliceUserKey.reducer;

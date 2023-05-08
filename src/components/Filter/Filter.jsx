@@ -1,16 +1,11 @@
 import css from './Filter.module.css';
-
-// ^ Рефакторінг у Redux
 import { useDispatch, useSelector } from 'react-redux';
-
 import { setFilter } from 'redux/filterSlice';
 import { selectFilter } from 'redux/selectors';
 
 export const Filter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
-
-  // Отримання даних з поля input
   const getInput = ({ target: { value } }) => {
     console.log('getInput >> value:', value);
 

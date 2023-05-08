@@ -1,0 +1,56 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  margin-top: 36px;
+  gap: 5px;
+
+  justify-content: center;
+}
+.listSideBtns {
+  margin-top: 20px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 14px 28px;
+
+  width: 68px;
+  height: 50px;
+
+  border: 2px solid transparent;
+  border-radius: 10.3108px;
+  box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  cursor: pointer;
+
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+}
+
+.sidesBtn {
+  margin: 0;
+  width: auto;
+}
+
+.activeBtn {
+  border-color: #2196f3;
+  color: dodgerblue;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #fbf8ff;
+  border-color: #2196f3;
+  color: dodgerblue;
+}

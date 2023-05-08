@@ -1,28 +1,19 @@
-.list {
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 8px;
+.error {
+  font-size: 24px;
 }
 
-.listItem {
-  display: flex;
-  justify-content: space-between;
-  padding: 3px;
-  align-items: center;
+.errorTitle {
+  margin-top: 32px;
+
+  color: #c72929;
 }
 
-.deleteBtn {
-  background-color: transparent;
-  border: 1px solid grey;
-  border-radius: 3px;
-  padding: 5px;
-  cursor: pointer;
-  min-width: 100px;
+.errorDetails {
+  margin-top: 16px;
 }
 
-.deleteBtn:hover {
-  background-color: rgb(229, 226, 226);
+.errorText {
+  margin-top: 16px;
+
+  font-style: normal;
 }

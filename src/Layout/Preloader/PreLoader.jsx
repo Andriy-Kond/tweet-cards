@@ -1,4 +1,3 @@
-// Спінер завантаження
 export const SmallPreLoader = () => {
   return (
     <div className="spinner-grow spinner-grow-sm" role="status">

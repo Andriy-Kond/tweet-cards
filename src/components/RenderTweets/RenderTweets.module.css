@@ -1,0 +1,6 @@
+.cardsList {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 36px;
+}

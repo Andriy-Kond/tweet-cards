@@ -1,4 +1,4 @@
-import { StyledNavLink } from 'Layout/StyledNavLink/StyledNavLink';
+import { StyledNavLink } from 'Services/StyledNavLink';
 
 export const Header = () => {
   return (
