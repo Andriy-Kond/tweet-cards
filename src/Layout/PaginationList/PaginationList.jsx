@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentPage, selectTotalPages } from 'redux/selectors';
 import {
-  decrementPage,
+  // decrementPage,
   incrementPage,
-  setCurrentPage,
+  // setCurrentPage,
 } from 'redux/sliceUserKey';
-import { useGetUsersQuery } from 'redux/tweetsApi';
+// import { useGetUsersQuery } from 'redux/tweetsApi';
 import css from './PaginationList.module.css';
 
 export function PaginationList() {
