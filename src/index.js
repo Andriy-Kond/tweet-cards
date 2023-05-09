@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={<PreLoader />} persistor={persister}>
-        <BrowserRouter basename="tweet-cards">
+        <BrowserRouter basename="/tweet-cards">
           <App />
         </BrowserRouter>
       </PersistGate>
