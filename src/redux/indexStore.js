@@ -16,7 +16,6 @@ import persistReducer from 'redux-persist/es/persistReducer';
 const userKeyPersistConfig = {
   key: 'userKey',
   storage,
-  // blacklist: ['stateAllTweets'],
 };
 
 const store = configureStore({

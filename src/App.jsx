@@ -1,8 +1,9 @@
-import PublicRoute from 'Layout/PublicRoute/PublicRoute';
-import { SharedLayout } from 'Layout/SharedLayout';
-import HomePage from 'pages/Home/HomePage';
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+import { SharedLayout } from 'Layout/SharedLayout';
+import { PublicRoute } from 'Layout/PublicRoute/PublicRoute';
+import HomePage from 'pages/Home/HomePage';
 
 const TweetsPage = lazy(() => import('./pages/Tweets/TweetsPage.jsx'));
 

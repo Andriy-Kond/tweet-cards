@@ -14,6 +14,8 @@ import { useEffect } from 'react';
 import { MyDropdown } from 'components/Dropdown/Dropdown';
 
 import { Error } from 'components/Error/Error';
+import css from './TweetsPage.module.css';
+import { Link } from 'react-router-dom';
 
 const TweetsPage = () => {
   const dataQuery = useGetUsersQuery();
@@ -40,14 +42,13 @@ const TweetsPage = () => {
 
   return (
     <div>
-      <h1>Це сторінка твітів</h1>
+      <Link to="/" className={`btn btn-outline-primary ${css.btn} `}>
+        На головну
+      </Link>
 
-      <h1>
-        <a href="/"> На головну</a>
-      </h1>
-
-      <h4>Фільтрація</h4>
-      <MyDropdown />
+      <div className={css.myDropdown}>
+        <MyDropdown />
+      </div>
       {isError && <Error error={error} />}
       {isLoading ? (
         <>

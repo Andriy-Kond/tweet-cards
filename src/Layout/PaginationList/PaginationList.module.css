@@ -45,12 +45,12 @@
 
 .activeBtn {
   border-color: #2196f3;
-  color: dodgerblue;
+  color: #2196f3;
 }
 
 .btn:hover,
 .btn:focus {
   background-color: #fbf8ff;
   border-color: #2196f3;
-  color: dodgerblue;
+  color: #2196f3;
 }

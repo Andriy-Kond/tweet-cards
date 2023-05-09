@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
 
-export default function PublicRoute({ redirectTo = '/' }) {
+export function PublicRoute({ redirectTo = '/' }) {
   return <Navigate to={redirectTo} />;
 }

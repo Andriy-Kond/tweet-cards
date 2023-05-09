@@ -3,6 +3,6 @@ import styled from 'styled-components';
 
 export const StyledNavLink = styled(NavLink)`
   &.active {
-    color: #a107a1;
+    color: #2196f3;
   }
 `;
