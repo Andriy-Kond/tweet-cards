@@ -6,19 +6,18 @@ import {
   setTotalPages,
   setUsersFilter,
 } from 'redux/sliceUserKey';
-import { BigPreLoader } from 'Layout/Preloader/PreLoader';
+import { PreLoader } from 'Layout/Preloader/PreLoader';
 import { TweetCards } from 'components/TweetCards/TweetCards';
 import { selectFilteredTweets, selectUsersFilter } from 'redux/selectors';
 import { CARDS_PER_PAGE } from 'Services/variables';
 import { useEffect } from 'react';
 import { MyDropdown } from 'components/Dropdown/Dropdown';
-import css from './TweetsPage.module.css';
-import Notiflix, { Loading } from 'notiflix';
+
+import { Error } from 'components/Error/Error';
 
 const TweetsPage = () => {
   const dataQuery = useGetUsersQuery();
   const { data: allTweets, isLoading, isError, error } = dataQuery;
-  console.log('TweetsPage >> isLoading:', isLoading);
 
   const dispatch = useDispatch();
   const userFilter = useSelector(selectUsersFilter);
@@ -49,45 +48,14 @@ const TweetsPage = () => {
 
       <h4>Фільтрація</h4>
       <MyDropdown />
-      {isError && (
-        <div className={css.error}>
-          {Notiflix.Notify.failure(`Увага помилка!`)}
-          <h1 className={css.errorTitle}>Помилка!</h1>
-
-          <h4 className={css.errorDetails}>Деталі помилки:</h4>
-          <p>
-            <b>data:</b> {error.data}
-          </p>
-          <p>
-            <b>error:</b> {error.error}
-          </p>
-          <p>
-            <b>originalStatus:</b> {error.originalStatus}
-          </p>
-          <p>
-            <b>status:</b> {error.status}
-          </p>
-
-          <p className={css.errorText}>
-            Якщо ви бачите "<b>originalStatus:</b> 429", то це значить, що ви
-            зробили забагато запитів на сервер.
-          </p>
-          <p>
-            Астанавітєсь! Тобто... Схаменіться! Оновіть сторінку і надалі робіть
-            запити на сервер не так швидко!
-          </p>
-          <p>Наші гноми втомлюються!!!</p>
-        </div>
-      )}
+      {isError && <Error error={error} />}
       {isLoading ? (
         <>
-          <BigPreLoader />
-          {Loading.dots()}
+          <PreLoader isLoading={isLoading} />
         </>
       ) : (
         <>
           <TweetCards renderingTweets={filteredTweets} />
-          {Loading.remove()}
         </>
       )}
     </div>

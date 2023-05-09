@@ -9,7 +9,7 @@ import './styles/project-normalize.css';
 import { PersistGate } from 'redux-persist/integration/react';
 import Notiflix from 'notiflix';
 import { Provider } from 'react-redux';
-import { BigPreLoader } from 'Layout/Preloader/PreLoader';
+import { PreLoader } from 'Layout/Preloader/PreLoader';
 
 Notiflix.Notify.init({
   position: 'center-top',
@@ -31,7 +31,7 @@ Notiflix.Notify.init({
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={<BigPreLoader />} persistor={persister}>
+      <PersistGate loading={<PreLoader />} persistor={persister}>
         <BrowserRouter>
           <App />
         </BrowserRouter>

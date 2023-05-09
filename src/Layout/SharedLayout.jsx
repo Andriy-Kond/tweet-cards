@@ -3,14 +3,14 @@ import { Suspense } from 'react';
 import { Container } from './Container/Container';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
-import { BigPreLoader } from './Preloader/PreLoader';
+import { PreLoader } from './Preloader/PreLoader';
 
 export const SharedLayout = () => {
   return (
     <Container>
       <main>
         <Header />
-        <Suspense fallback={<BigPreLoader />}>
+        <Suspense fallback={<PreLoader />}>
           <Outlet />
         </Suspense>
       </main>

@@ -1,15 +1,14 @@
-export const SmallPreLoader = () => {
-  return (
-    <div className="spinner-grow spinner-grow-sm" role="status">
-      <span className="visually-hidden">Loading...</span>
-    </div>
-  );
-};
+import css from './PreLoader.module.css';
 
-export const BigPreLoader = () => {
+export const PreLoader = () => {
   return (
-    <div className="spinner-grow" role="status">
-      <span className="visually-hidden">Loading...</span>
-    </div>
+    <>
+      <div className={css.ldsEllipsis}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </>
   );
 };
