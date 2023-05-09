@@ -19,20 +19,12 @@ Notiflix.Notify.init({
   fontSize: '18px',
   width: '350px',
 });
-// Варіанти повідомлень Notiflix:
-// Notiflix.Notify.success(`Fulfilled promise ${position} in ${delay}ms`);
-// Notiflix.Notify.warning('Please choose a date in the future');
-// Notiflix.Notify.failure(`Oops, there is no country with that name`);
-// Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
-
-// Дістати зі стору будь-яке значення - хук useSelector
-// Для виконання якоїсь дії стору - хук useDispatch
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={<PreLoader />} persistor={persister}>
-        <BrowserRouter>
+        <BrowserRouter basename="tweet-cards">
           <App />
         </BrowserRouter>
       </PersistGate>
