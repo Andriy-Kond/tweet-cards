@@ -1,14 +1,14 @@
 import { RenderTweets } from 'components/RenderTweets/RenderTweets';
 import { PaginationList } from 'Layout/PaginationList/PaginationList';
 import { useSelector } from 'react-redux';
-import { selectCurrentPage } from 'redux/selectors';
+import { selectCurrentPage, selectFilteredTweets } from 'redux/selectors';
 import { CARDS_PER_PAGE } from 'Services/variables';
 
-export const TweetCards = ({ renderingTweets }) => {
+export const TweetCards = () => {
+  const filteredTweets = useSelector(selectFilteredTweets);
   const currentPage = useSelector(selectCurrentPage);
   const lastIndex = currentPage * CARDS_PER_PAGE;
-  const firstIndex = lastIndex - CARDS_PER_PAGE;
-  const currentTweets = renderingTweets?.slice(firstIndex, lastIndex);
+  const currentTweets = filteredTweets?.slice(1, lastIndex + 1);
 
   return (
     <>

@@ -22,10 +22,9 @@ const TweetsPage = () => {
   const dispatch = useDispatch();
   const userFilter = useSelector(selectUsersFilter);
   const filteredTweets = useSelector(selectFilteredTweets);
-  const renderingTweets = filteredTweets;
   const totalPages =
-    renderingTweets?.length > 0
-      ? Math.ceil(renderingTweets?.length / CARDS_PER_PAGE)
+    filteredTweets?.length > 0
+      ? Math.ceil(filteredTweets?.length / CARDS_PER_PAGE)
       : 1;
 
   useEffect(() => {
@@ -45,11 +44,7 @@ const TweetsPage = () => {
         <MyDropdown />
       </div>
       {isError && <Error error={error} />}
-      {isLoading ? (
-        <PreLoader isLoading={isLoading} />
-      ) : (
-        <TweetCards renderingTweets={filteredTweets} />
-      )}
+      {isLoading ? <PreLoader isLoading={isLoading} /> : <TweetCards />}
     </div>
   );
 };

@@ -43,6 +43,11 @@
   width: auto;
 }
 
+.loadMoreBtn {
+  margin-top: 36px;
+  width: auto;
+}
+
 .activeBtn {
   border-color: #2196f3;
   color: #2196f3;

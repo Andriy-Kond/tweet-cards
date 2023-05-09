@@ -6,6 +6,7 @@ import {
   incrementPage,
   setCurrentPage,
 } from 'redux/sliceUserKey';
+import { useGetUsersQuery } from 'redux/tweetsApi';
 import css from './PaginationList.module.css';
 
 export function PaginationList() {
@@ -13,26 +14,40 @@ export function PaginationList() {
   let currentPage = useSelector(selectCurrentPage);
   const totalPages = useSelector(selectTotalPages);
 
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
-  }
+  // const pageNumbers = [];
+  // for (let i = 1; i <= totalPages; i++) {
+  //   pageNumbers.push(i);
+  // }
 
-  useEffect(() => {
-    if (totalPages < currentPage) {
-      dispatch(setCurrentPage(totalPages));
-    }
-  }, [currentPage, dispatch, totalPages]);
+  // useEffect(() => {
+  //   if (totalPages < currentPage) {
+  //     dispatch(setCurrentPage(totalPages));
+  //   }
+  // }, [currentPage, dispatch, totalPages]);
 
-  const pageSelection = pageNumber => {
-    dispatch(setCurrentPage(pageNumber));
+  // const pageSelection = pageNumber => {
+  //   dispatch(setCurrentPage(pageNumber));
+  // };
+
+  // const nextPage = () => dispatch(incrementPage());
+  // const prevPage = () => dispatch(decrementPage());
+
+  // useEffect(() => {
+  //   if (totalPages < currentPage) {
+  //     dispatch(setCurrentPage(totalPages));
+  //   }
+  // }, [currentPage, dispatch, totalPages]);
+
+  // const dataQuery = useGetUsersQuery();
+  // const { data: allTweets, isLoading, isError, error } = dataQuery;
+
+  const nextPage = () => {
+    dispatch(incrementPage());
   };
-  const nextPage = () => dispatch(incrementPage());
-  const prevPage = () => dispatch(decrementPage());
 
   return (
     <div className={css.wrapper}>
-      <ul className={css.list}>
+      {/* <ul className={css.list}>
         {pageNumbers.map(number => {
           return (
             <li key={number}>
@@ -72,7 +87,17 @@ export function PaginationList() {
             Next Page
           </button>
         </li>
-      </ul>
+      </ul> */}
+
+      <button
+        type="button"
+        id="end"
+        disabled={currentPage === totalPages}
+        onClick={nextPage}
+        className={`${css.btn} ${css.loadMoreBtn}`}
+      >
+        Load more
+      </button>
     </div>
   );
 }
