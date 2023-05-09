@@ -8,7 +8,7 @@ export const TweetCards = () => {
   const filteredTweets = useSelector(selectFilteredTweets);
   const currentPage = useSelector(selectCurrentPage);
   const lastIndex = currentPage * CARDS_PER_PAGE;
-  const currentTweets = filteredTweets?.slice(1, lastIndex + 1);
+  const currentTweets = filteredTweets?.slice(0, lastIndex);
 
   return (
     <>
