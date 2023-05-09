@@ -7,16 +7,14 @@ import { PreLoader } from './Preloader/PreLoader';
 
 export const SharedLayout = () => {
   return (
-    <>
-      <Container>
-        <main>
-          <Header />
-          <Suspense fallback={<PreLoader />}>
-            <Outlet />
-          </Suspense>
-        </main>
-        <Footer />
-      </Container>
-    </>
+    <Container>
+      <main>
+        <Header />
+        <Suspense fallback={<PreLoader />}>
+          <Outlet />
+        </Suspense>
+      </main>
+      <Footer />
+    </Container>
   );
 };

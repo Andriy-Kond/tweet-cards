@@ -3,9 +3,7 @@ import css from './Header.module.css';
 
 export const Header = () => {
   return (
-    <nav
-      className={`navbar navbar-expand-lg bg-body-tertiary ${css.navContainer}`}
-    >
+    <nav className={` ${css.navContainer} navbar navbar-expand-lg  `}>
       <div className="container-fluid">
         <button
           className="navbar-toggler"
