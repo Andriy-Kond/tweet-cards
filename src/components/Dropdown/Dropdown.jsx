@@ -6,7 +6,6 @@ import {
   setUsersFilter,
 } from 'redux/sliceUserKey';
 import { ALL, FOLLOW, FOLLOWING } from 'Services/variables';
-
 import Dropdown from 'react-dropdown-select';
 import Notiflix from 'notiflix';
 
@@ -28,14 +27,12 @@ export const MyDropdown = () => {
   ];
 
   return (
-    <>
-      <Dropdown
-        options={options}
-        values={[{ label: userFilter, value: userFilter }]}
-        onChange={setFilter}
-        placeholder="Select an option"
-        style={{ width: '200px' }}
-      />
-    </>
+    <Dropdown
+      options={options}
+      values={[{ label: userFilter, value: userFilter }]}
+      onChange={setFilter}
+      placeholder="Select an option"
+      style={{ width: '200px' }}
+    />
   );
 };

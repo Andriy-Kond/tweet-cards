@@ -10,11 +10,9 @@ import {
   SECONDARY_COLOR,
 } from 'Services/variables';
 import { useUpdateTweetMutation } from 'redux/tweetsApi';
-
 import logo from '../../assets/logo-go-it.png';
 import messages from '../../assets/messages.png';
 import defaultAvatar from '../../assets/default-avatar.png';
-
 import Notiflix from 'notiflix';
 
 export function MarkupTweets(props) {
@@ -46,7 +44,7 @@ export function MarkupTweets(props) {
 
   return (
     <li className={css.listItem}>
-      <img src={logo} alt="goIT" className={css.logo} />
+      <img src={logo} alt="GoIT" className={css.logo} />
       <img src={messages} alt="messages" className={css.messages} />
 
       <div className={css.line}>

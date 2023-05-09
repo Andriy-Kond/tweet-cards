@@ -12,7 +12,6 @@ import { selectFilteredTweets, selectUsersFilter } from 'redux/selectors';
 import { CARDS_PER_PAGE } from 'Services/variables';
 import { useEffect } from 'react';
 import { MyDropdown } from 'components/Dropdown/Dropdown';
-
 import { Error } from 'components/Error/Error';
 import css from './TweetsPage.module.css';
 import { Link } from 'react-router-dom';
@@ -20,14 +19,10 @@ import { Link } from 'react-router-dom';
 const TweetsPage = () => {
   const dataQuery = useGetUsersQuery();
   const { data: allTweets, isLoading, isError, error } = dataQuery;
-
   const dispatch = useDispatch();
   const userFilter = useSelector(selectUsersFilter);
-
   const filteredTweets = useSelector(selectFilteredTweets);
-
   const renderingTweets = filteredTweets;
-
   const totalPages =
     renderingTweets?.length > 0
       ? Math.ceil(renderingTweets?.length / CARDS_PER_PAGE)
@@ -51,13 +46,9 @@ const TweetsPage = () => {
       </div>
       {isError && <Error error={error} />}
       {isLoading ? (
-        <>
-          <PreLoader isLoading={isLoading} />
-        </>
+        <PreLoader isLoading={isLoading} />
       ) : (
-        <>
-          <TweetCards renderingTweets={filteredTweets} />
-        </>
+        <TweetCards renderingTweets={filteredTweets} />
       )}
     </div>
   );
