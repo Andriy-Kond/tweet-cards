@@ -1,6 +1,6 @@
 .listItem {
   position: relative;
-  width: 380px;
+  max-width: 380px;
   height: 460px;
 
   display: flex;

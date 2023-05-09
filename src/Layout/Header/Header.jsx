@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { StyledNavLink } from 'Services/StyledNavLink';
 import css from './Header.module.css';
 
@@ -5,8 +6,11 @@ export const Header = () => {
   return (
     <nav className={` ${css.navContainer} navbar navbar-expand-lg  `}>
       <div className="container-fluid">
+        <Link to="/" className="navbar-brand">
+          GoIT
+        </Link>
         <button
-          className="navbar-toggler"
+          className={`navbar-toggler ${css.mr}`}
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"

@@ -32,7 +32,7 @@ export const MyDropdown = () => {
       values={[{ label: userFilter, value: userFilter }]}
       onChange={setFilter}
       placeholder="Select an option"
-      style={{ width: '200px', backgroundColor: '#fff' }}
+      style={{ maxWidth: '200px', backgroundColor: '#fff' }}
     />
   );
 };

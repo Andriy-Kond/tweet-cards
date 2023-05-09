@@ -4,7 +4,7 @@
 }
 
 .ulContainer {
-  width: 100%;
+  width: 100vw;
   gap: 5px;
 }
 
@@ -14,4 +14,8 @@
   @media screen and (max-width: 991px) {
     margin-left: 0;
   }
+}
+
+.mr {
+  margin-left: auto;
 }
