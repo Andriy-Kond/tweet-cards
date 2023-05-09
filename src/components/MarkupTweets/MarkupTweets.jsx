@@ -44,8 +44,18 @@ export function MarkupTweets(props) {
 
   return (
     <li className={css.listItem}>
-      <img src={logo} alt="GoIT" className={css.logo} />
-      <img src={messages} alt="messages" className={css.messages} />
+      <img
+        src={logo}
+        alt="GoIT"
+        className={css.logo}
+        style={{ height: '22px', width: '76px' }}
+      />
+      <img
+        src={messages}
+        alt="messages"
+        className={css.messages}
+        style={{ height: '168px', width: '308px' }}
+      />
 
       <div className={css.line}>
         <div className={css.circle}>
@@ -53,6 +63,7 @@ export function MarkupTweets(props) {
             src={avatar ? avatar : defaultAvatar}
             alt="avatar"
             className={css.avatar}
+            style={{ height: '80px', width: '80px' }}
           />
         </div>
       </div>
