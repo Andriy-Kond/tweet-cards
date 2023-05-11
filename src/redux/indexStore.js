@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { tweetsAPI } from './tweetsApi';
-import sliceUserKeyReducer from './sliceUserKey';
+import sliceUsersReducer from './sliceUsers';
 import storage from 'redux-persist/lib/storage';
 import {
   FLUSH,
@@ -13,14 +13,14 @@ import {
 import persistStore from 'redux-persist/lib/persistStore';
 import persistReducer from 'redux-persist/es/persistReducer';
 
-const userKeyPersistConfig = {
-  key: 'userKey',
+const usersPersistConfig = {
+  key: 'users',
   storage,
 };
 
 const store = configureStore({
   reducer: {
-    storeUserKey: persistReducer(userKeyPersistConfig, sliceUserKeyReducer),
+    storeUsers: persistReducer(usersPersistConfig, sliceUsersReducer),
     [tweetsAPI.reducerPath]: tweetsAPI.reducer,
   },
 

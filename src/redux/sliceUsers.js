@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ALL, FOLLOW, FOLLOWING } from 'Services/variables';
 
-const sliceUserKey = createSlice({
-  name: 'userKey',
+const sliceUsers = createSlice({
+  name: 'users',
 
   initialState: {
-    stateUserKeys: [],
+    stateUsers: [],
     stateAllTweets: [],
     stateFilteredTweets: [],
     stateUsersFilter: ALL,
@@ -15,16 +15,16 @@ const sliceUserKey = createSlice({
 
   reducers: {
     toggleUserSubscribe(state, action) {
-      const isExist = state.stateUserKeys.find(
+      const isExist = state.stateUsers.find(
         contact => contact === action.payload
       );
 
       if (isExist) {
-        state.stateUserKeys = state.stateUserKeys.filter(
+        state.stateUsers = state.stateUsers.filter(
           contact => contact !== action.payload
         );
       } else {
-        state.stateUserKeys.push(action.payload);
+        state.stateUsers.push(action.payload);
       }
     },
 
@@ -34,7 +34,7 @@ const sliceUserKey = createSlice({
           state.stateFilteredTweets =
             state.stateAllTweets?.length > 0
               ? state.stateAllTweets.filter(tweet =>
-                  state.stateUserKeys.includes(tweet.id)
+                  state.stateUsers.includes(tweet.id)
                 )
               : [];
           break;
@@ -42,7 +42,7 @@ const sliceUserKey = createSlice({
           state.stateFilteredTweets =
             state.stateAllTweets?.length > 0
               ? state.stateAllTweets.filter(
-                  tweet => !state.stateUserKeys.includes(tweet.id)
+                  tweet => !state.stateUsers.includes(tweet.id)
                 )
               : [];
           break;
@@ -88,6 +88,6 @@ export const {
   incrementPage,
   decrementPage,
   setTotalPages,
-} = sliceUserKey.actions;
+} = sliceUsers.actions;
 
-export default sliceUserKey.reducer;
+export default sliceUsers.reducer;
