@@ -4,7 +4,7 @@ import {
   setCurrentPage,
   setFilteredTweets,
   setUsersFilter,
-} from 'redux/sliceUsers';
+} from 'redux/sliceUserKey';
 import { ALL, FOLLOW, FOLLOWING } from 'Services/variables';
 import Dropdown from 'react-dropdown-select';
 import Notiflix from 'notiflix';
