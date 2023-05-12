@@ -5,7 +5,7 @@ import {
   setFilteredTweets,
   setTotalPages,
   setUsersFilter,
-} from 'redux/sliceUserKey';
+} from 'redux/sliceUsers';
 import { PreLoader } from 'Layout/Preloader/PreLoader';
 import { TweetCards } from 'components/TweetCards/TweetCards';
 import { selectFilteredTweets, selectUsersFilter } from 'redux/selectors';

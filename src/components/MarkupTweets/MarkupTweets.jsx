@@ -1,7 +1,7 @@
 import css from './MarkupTweets.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilteredTweets, toggleUserSubscribe } from 'redux/sliceUserKey';
-import { selectUserKeys } from 'redux/selectors';
+import { setFilteredTweets, toggleUserSubscribe } from 'redux/sliceUsers';
+import { selectUsers } from 'redux/selectors';
 import { useState } from 'react';
 import {
   FOLLOW,
@@ -19,7 +19,7 @@ export function MarkupTweets(props) {
   const { user, avatar, followers, tweets, id } = props;
   const [updateTweet] = useUpdateTweetMutation();
   const dispatch = useDispatch();
-  const isExist = useSelector(selectUserKeys);
+  const isExist = useSelector(selectUsers);
   const [btnColor, setBtnColor] = useState(
     isExist.includes(id) ? SECONDARY_COLOR : PRIMARY_COLOR
   );
