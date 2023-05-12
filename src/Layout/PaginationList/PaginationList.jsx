@@ -15,16 +15,15 @@ export function PaginationList() {
     pageNumbers.push(i);
   }
 
-  // useEffect(() => {
-  //   if (totalPages < currentPage) {
-  //     dispatch(setCurrentPage(totalPages));
-  //   }
-  // }, [currentPage, dispatch, totalPages]);
+  useEffect(() => {
+    if (totalPages < currentPage) {
+      dispatch(setCurrentPage(totalPages));
+    }
+  }, [currentPage, dispatch, totalPages]);
 
   const pageSelection = pageNumber => {
     dispatch(setCurrentPage(pageNumber));
   };
-
   const nextPage = () => dispatch(incrementPage());
   const prevPage = () => dispatch(decrementPage());
 
@@ -75,7 +74,7 @@ export function PaginationList() {
       <button
         type="button"
         id="end"
-        // disabled={currentPage === totalPages}
+        disabled={currentPage === totalPages}
         onClick={nextPage}
         className={`${css.btn} ${css.loadMoreBtn}`}
       >

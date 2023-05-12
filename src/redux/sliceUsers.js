@@ -5,55 +5,61 @@ const sliceUsers = createSlice({
   name: 'users',
 
   initialState: {
-    stateFollowingUsers: [],
+    stateUsers: [],
+    stateAllTweets: [],
     stateFilteredTweets: [],
-    stateDownloadedTweets: [],
-    stateFilter: ALL,
+    stateUsersFilter: ALL,
     stateCurrentPage: 1,
     stateTotalPages: 1,
-    stateIsLoading: false,
   },
 
   reducers: {
     toggleUserSubscribe(state, action) {
-      const isExist = state.stateFollowingUsers.find(
+      const isExist = state.stateUsers.find(
         contact => contact === action.payload
       );
 
       if (isExist) {
-        state.stateFollowingUsers = state.stateFollowingUsers.filter(
+        state.stateUsers = state.stateUsers.filter(
           contact => contact !== action.payload
         );
       } else {
-        state.stateFollowingUsers.push(action.payload);
+        state.stateUsers.push(action.payload);
       }
     },
 
-    setFilteredTweets(state, action) {
-      switch (state.stateFilter) {
-        case ALL:
-          state.stateFilteredTweets = action.payload;
-
-          break;
+    setFilteredTweets(state) {
+      switch (state.stateUsersFilter) {
         case FOLLOWING:
-          state.stateFilteredTweets = action.payload.filter(tweet =>
-            state.stateFollowingUsers.includes(tweet.id)
-          );
-
+          state.stateFilteredTweets =
+            state.stateAllTweets?.length > 0
+              ? state.stateAllTweets.filter(tweet =>
+                  state.stateUsers.includes(tweet.id)
+                )
+              : [];
           break;
         case FOLLOW:
-          state.stateFilteredTweets = action.payload.filter(
-            tweet => !state.stateFollowingUsers.includes(tweet.id)
-          );
+          state.stateFilteredTweets =
+            state.stateAllTweets?.length > 0
+              ? state.stateAllTweets.filter(
+                  tweet => !state.stateUsers.includes(tweet.id)
+                )
+              : [];
           break;
-
+        case ALL:
+          state.stateFilteredTweets = state.stateAllTweets;
+          break;
         default:
           break;
       }
     },
 
+    setAllTweets(state, action) {
+      state.stateAllTweets = action.payload;
+    },
+
     setUsersFilter(state, action) {
-      state.stateFilter = action.payload;
+      state.stateUsersFilter = action.payload;
     },
 
     setCurrentPage(state, action) {
@@ -70,27 +76,18 @@ const sliceUsers = createSlice({
     setTotalPages(state, action) {
       state.stateTotalPages = action.payload;
     },
-
-    setDownloadedTweets(state, action) {
-      state.stateDownloadedTweets.push(...action.payload);
-    },
-
-    setIsLoading(state, action) {
-      state.stateIsLoading = action.payload;
-    },
   },
 });
 
 export const {
   toggleUserSubscribe,
   setFilteredTweets,
+  setAllTweets,
   setUsersFilter,
   setCurrentPage,
   incrementPage,
   decrementPage,
   setTotalPages,
-  setDownloadedTweets,
-  setIsLoading,
 } = sliceUsers.actions;
 
 export default sliceUsers.reducer;

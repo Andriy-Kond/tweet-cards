@@ -1,7 +1,7 @@
 import css from './MarkupTweets.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilteredTweets, toggleUserSubscribe } from 'redux/sliceUsers';
-import { selectFollowingUsers, selectIsLoading } from 'redux/selectors';
+import { selectUsers } from 'redux/selectors';
 import { useState } from 'react';
 import {
   FOLLOW,
@@ -9,19 +9,17 @@ import {
   PRIMARY_COLOR,
   SECONDARY_COLOR,
 } from 'Services/variables';
-import { useGetUsersQuery, useUpdateTweetMutation } from 'redux/tweetsApi';
+import { useUpdateTweetMutation } from 'redux/tweetsApi';
 import logo from '../../assets/logo-go-it.png';
 import messages from '../../assets/messages.png';
 import defaultAvatar from '../../assets/default-avatar.png';
 import Notiflix from 'notiflix';
 
 export function MarkupTweets(props) {
-  const { data: allTweets } = useGetUsersQuery();
-
   const { user, avatar, followers, tweets, id } = props;
   const [updateTweet] = useUpdateTweetMutation();
   const dispatch = useDispatch();
-  const isExist = useSelector(selectFollowingUsers);
+  const isExist = useSelector(selectUsers);
   const [btnColor, setBtnColor] = useState(
     isExist.includes(id) ? SECONDARY_COLOR : PRIMARY_COLOR
   );
@@ -38,12 +36,11 @@ export function MarkupTweets(props) {
       Notiflix.Notify.success(`You subscribed to ${user}`);
     }
 
-    dispatch(setFilteredTweets(allTweets));
+    dispatch(setFilteredTweets());
     updateTweet({ user, avatar, followers, tweets, id });
   };
 
   const numberOptions = { style: 'decimal', minimumFractionDigits: 0 };
-  const isLoading = useSelector(selectIsLoading);
 
   return (
     <li className={css.listItem}>
