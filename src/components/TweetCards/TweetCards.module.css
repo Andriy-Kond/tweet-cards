@@ -1,4 +1,4 @@
-/* .cardsList {
+.cardsList {
   display: flex;
   justify-content: center;
   gap: 5px;
@@ -6,4 +6,4 @@
 
   flex-wrap: wrap;
   gap: 30px;
-} */
+}

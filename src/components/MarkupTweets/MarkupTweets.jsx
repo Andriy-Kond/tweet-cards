@@ -1,7 +1,7 @@
 import css from './MarkupTweets.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilteredTweets, toggleUserSubscribe } from 'redux/sliceUsers';
-import { selectUsers } from 'redux/selectors';
+import { selectFollowingUsers } from 'redux/selectors';
 import { useState } from 'react';
 import {
   FOLLOW,
@@ -17,16 +17,17 @@ import Notiflix from 'notiflix';
 
 export function MarkupTweets(props) {
   const { user, avatar, followers, tweets, id } = props;
-  const [updateTweet] = useUpdateTweetMutation();
+  const [updateTweet, { isLoadingUpd, isError, isSuccess }] =
+    useUpdateTweetMutation();
   const dispatch = useDispatch();
-  const isExist = useSelector(selectUsers);
+  const followingUsers = useSelector(selectFollowingUsers);
   const [btnColor, setBtnColor] = useState(
-    isExist.includes(id) ? SECONDARY_COLOR : PRIMARY_COLOR
+    followingUsers.includes(id) ? SECONDARY_COLOR : PRIMARY_COLOR
   );
 
   const toggleFollow = followers => {
     dispatch(toggleUserSubscribe(id));
-    if (isExist.includes(id)) {
+    if (followingUsers.includes(id)) {
       followers = followers - 1;
       setBtnColor(PRIMARY_COLOR);
       Notiflix.Notify.warning(`You unsubscribed to ${user}`);
@@ -86,7 +87,7 @@ export function MarkupTweets(props) {
           toggleFollow(followers);
         }}
       >
-        {isExist.includes(id) ? FOLLOWING : FOLLOW}
+        {followingUsers.includes(id) ? FOLLOWING : FOLLOW}
       </button>
     </li>
   );

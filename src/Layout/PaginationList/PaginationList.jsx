@@ -10,10 +10,10 @@ export function PaginationList() {
   let currentPage = useSelector(selectCurrentPage);
   const totalPages = useSelector(selectTotalPages);
 
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
-  }
+  // const pageNumbers = [];
+  // for (let i = 1; i <= totalPages; i++) {
+  //   pageNumbers.push(i);
+  // }
 
   useEffect(() => {
     if (totalPages < currentPage) {
@@ -29,7 +29,7 @@ export function PaginationList() {
 
   return (
     <div className={css.wrapper}>
-      <ul className={css.list}>
+      {/* <ul className={css.list}>
         {pageNumbers.map(number => {
           return (
             <li key={number}>
@@ -48,7 +48,7 @@ export function PaginationList() {
             </li>
           );
         })}
-      </ul>
+      </ul> */}
 
       <ul className={`${css.list} ${css.listSideBtns}`}>
         <li>
