@@ -48,13 +48,15 @@ export function MarkupTweets(props) {
         src={logo}
         alt="GoIT"
         className={css.logo}
-        style={{ height: '22px', width: '76px' }}
+        heigh="22px"
+        width="76px"
       />
       <img
         src={messages}
         alt="messages"
         className={css.messages}
-        style={{ height: '168px', width: '308px' }}
+        height="168"
+        width="308px"
       />
 
       <div className={css.line}>
@@ -63,7 +65,8 @@ export function MarkupTweets(props) {
             src={avatar ? avatar : defaultAvatar}
             alt="avatar"
             className={css.avatar}
-            style={{ height: '80px', width: '80px' }}
+            height="80px"
+            width="80px"
           />
         </div>
       </div>
