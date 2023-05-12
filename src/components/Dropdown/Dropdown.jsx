@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilter } from 'redux/selectors';
+import { selectUsersFilter } from 'redux/selectors';
 import {
   setCurrentPage,
   setFilteredTweets,
@@ -8,17 +8,15 @@ import {
 import { ALL, FOLLOW, FOLLOWING } from 'Services/variables';
 import Dropdown from 'react-dropdown-select';
 import Notiflix from 'notiflix';
-import { useGetUsersQuery } from 'redux/tweetsApi';
 
 export const MyDropdown = () => {
   const dispatch = useDispatch();
-  const { data: allTweets } = useGetUsersQuery();
-  const userFilter = useSelector(selectFilter);
+  const userFilter = useSelector(selectUsersFilter);
 
   const setFilter = selectedOption => {
     dispatch(setCurrentPage(1));
     dispatch(setUsersFilter(selectedOption[0].value));
-    dispatch(setFilteredTweets(allTweets));
+    dispatch(setFilteredTweets());
     Notiflix.Notify.info(`Show ${selectedOption[0].value} users`);
   };
 
