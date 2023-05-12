@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { CARDS_PER_PAGE } from 'Services/variables';
+// import { CARDS_PER_PAGE } from 'Services/variables';
 
 export const tweetsAPI = createApi({
   reducerPath: 'fetchTweets',

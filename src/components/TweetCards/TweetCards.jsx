@@ -5,7 +5,7 @@ import { PreLoader } from 'Layout/Preloader/PreLoader';
 import { useSelector } from 'react-redux';
 import {
   selectCurrentPage,
-  selectDownloadedTweets,
+  // selectDownloadedTweets,
   selectFilteredTweets,
 } from 'redux/selectors';
 import { CARDS_PER_PAGE } from 'Services/variables';
