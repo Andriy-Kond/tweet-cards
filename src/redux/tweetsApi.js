@@ -1,4 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { useSelector } from 'react-redux';
+import { CARDS_PER_PAGE } from 'Services/variables';
+import { selectCurrentPage } from './selectors';
 
 export const tweetsAPI = createApi({
   reducerPath: 'fetchTweets',
@@ -10,8 +13,9 @@ export const tweetsAPI = createApi({
 
   endpoints: builder => ({
     getUsers: builder.query({
-      query: () => '/users',
-
+      query: currentPage => {
+        return `/users/?p=${currentPage}&l=${CARDS_PER_PAGE}`;
+      },
       providesTags: ['tweetsSubscribe'],
     }),
 
