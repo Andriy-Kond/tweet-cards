@@ -17,8 +17,10 @@ import Notiflix from 'notiflix';
 
 export function MarkupTweets(props) {
   const { user, avatar, followers, tweets, id } = props;
-  const [updateTweet, { isLoadingUpd, isError, isSuccess }] =
-    useUpdateTweetMutation();
+  const [
+    updateTweet,
+    // { isLoadingUpd, isError, isSuccess }
+  ] = useUpdateTweetMutation();
   const dispatch = useDispatch();
   const followingUsers = useSelector(selectFollowingUsers);
   const [btnColor, setBtnColor] = useState(

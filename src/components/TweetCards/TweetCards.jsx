@@ -16,7 +16,7 @@ export const TweetCards = ({ isLoading, isError, error, limitedTweets }) => {
   const currentPage = useSelector(selectCurrentPage);
   const lastIndex = currentPage * CARDS_PER_PAGE;
   const currentTweets = filteredTweets?.slice(0, lastIndex);
-  const downloadedTweets = useSelector(selectDownloadedTweets);
+  // const downloadedTweets = useSelector(selectDownloadedTweets);
 
   // const currentTweets = downloadedTweets?.slice(0, lastIndex);
 

@@ -21,9 +21,9 @@ export function PaginationList() {
     }
   }, [currentPage, dispatch, totalPages]);
 
-  const pageSelection = pageNumber => {
-    dispatch(setCurrentPage(pageNumber));
-  };
+  // const pageSelection = pageNumber => {
+  //   dispatch(setCurrentPage(pageNumber));
+  // };
   const nextPage = () => dispatch(incrementPage());
   const prevPage = () => dispatch(decrementPage());
 

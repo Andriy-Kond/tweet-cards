@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetUsersQuery } from 'redux/tweetsApi';
 import {
-  setCurrentPage,
+  // setCurrentPage,
   setDownloadedTweets,
   setFilteredTweets,
   setIsDisabledLoadMoreBtn,
@@ -13,17 +13,17 @@ import {
 import { PreLoader } from 'Layout/Preloader/PreLoader';
 import { TweetCards } from 'components/TweetCards/TweetCards';
 import {
-  selectCurrentPage,
+  // selectCurrentPage,
   selectFilteredTweets,
   selectUsersFilter,
 } from 'redux/selectors';
 import { CARDS_PER_PAGE } from 'Services/variables';
 import { useEffect } from 'react';
 import { MyDropdown } from 'components/Dropdown/Dropdown';
-import { Error } from 'components/Error/Error';
+// import { Error } from 'components/Error/Error';
 import css from './TweetsPage.module.css';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const TweetsPage = () => {
   const dataQuery = useGetUsersQuery();
