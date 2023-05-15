@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUsersFilter } from 'redux/selectors';
+import Dropdown from 'react-dropdown-select';
+import Notiflix from 'notiflix';
 import {
   setCurrentPage,
   setFilteredTweets,
   setUsersFilter,
 } from 'redux/sliceUsers';
+import { selectUsersFilter } from 'redux/selectors';
 import { ALL, FOLLOW, FOLLOWING } from 'Services/variables';
-import Dropdown from 'react-dropdown-select';
-import Notiflix from 'notiflix';
 
 export const MyDropdown = () => {
   const dispatch = useDispatch();

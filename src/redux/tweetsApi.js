@@ -6,9 +6,7 @@ export const tweetsAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://6454a8f5a74f994b33457e38.mockapi.io/',
   }),
-
   tagTypes: ['tweetsSubscribe'],
-
   endpoints: builder => ({
     // all array:
     getUsers: builder.query({

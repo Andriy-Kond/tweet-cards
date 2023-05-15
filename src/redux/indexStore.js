@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { tweetsAPI } from './tweetsApi';
-import sliceUsersReducer from './sliceUsers';
-import storage from 'redux-persist/lib/storage';
+import persistStore from 'redux-persist/lib/persistStore';
+import persistReducer from 'redux-persist/es/persistReducer';
 import {
   FLUSH,
   REHYDRATE,
@@ -10,8 +9,9 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import persistStore from 'redux-persist/lib/persistStore';
-import persistReducer from 'redux-persist/es/persistReducer';
+import storage from 'redux-persist/lib/storage';
+import sliceUsersReducer from './sliceUsers';
+import { tweetsAPI } from './tweetsApi';
 
 const usersPersistConfig = {
   key: 'users',

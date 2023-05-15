@@ -1,26 +1,23 @@
-import css from './MarkupTweets.module.css';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Notiflix from 'notiflix';
+import { useUpdateTweetMutation } from 'redux/tweetsApi';
 import { setFilteredTweets, toggleUserSubscribe } from 'redux/sliceUsers';
 import { selectFollowingUsers } from 'redux/selectors';
-import { useState } from 'react';
 import {
   FOLLOW,
   FOLLOWING,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
 } from 'Services/variables';
-import { useUpdateTweetMutation } from 'redux/tweetsApi';
 import logo from '../../assets/logo-go-it.png';
 import messages from '../../assets/messages.png';
 import defaultAvatar from '../../assets/default-avatar.png';
-import Notiflix from 'notiflix';
+import css from './MarkupTweets.module.css';
 
 export function MarkupTweets(props) {
   const { user, avatar, followers, tweets, id } = props;
-  const [
-    updateTweet,
-    // { isLoadingUpd, isError, isSuccess }
-  ] = useUpdateTweetMutation();
+  const [updateTweet] = useUpdateTweetMutation();
   const dispatch = useDispatch();
   const followingUsers = useSelector(selectFollowingUsers);
   const [btnColor, setBtnColor] = useState(
