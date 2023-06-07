@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { StyledNavLink } from 'Services/StyledNavLink';
 import css from './HomePage.module.css';
 
 const HomePage = () => {
