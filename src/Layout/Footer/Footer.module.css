@@ -1,5 +1,7 @@
 .footerContainer {
   margin-top: 40px;
+  position: sticky;
+  bottom: 0;
 }
 .footerContainer {
   margin-top: 40px;

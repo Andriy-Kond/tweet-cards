@@ -45,7 +45,7 @@ const TweetsPage = () => {
   }, [limitedTweets, dispatch, totalPages, userFilter, isLoading]);
 
   return (
-    <div>
+    <div className={css.tweetsContainer}>
       <Link to="/" className={`btn btn-outline-primary ${css.btn} `}>
         На головну
       </Link>

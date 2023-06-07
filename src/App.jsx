@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 
 import { SharedLayout } from 'Layout/SharedLayout';
@@ -12,7 +12,7 @@ export const App = () => {
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<HomePage />} />
         <Route path="/tweets" element={<TweetsPage />} />
-        <Route path="*" element={<HomePage />} />
+        <Route path="*" element={<Navigate to="/" element={<HomePage />} />} />
       </Route>
     </Routes>
   );

@@ -46,14 +46,14 @@ export function MarkupTweets(props) {
     <li className={css.listItem}>
       <img
         src={logo}
-        alt="GoIT"
+        alt="GoIT logo"
         className={css.logo}
         heigh="22px"
         width="76px"
       />
       <img
         src={messages}
-        alt="messages"
+        alt="background card"
         className={css.messages}
         height="168"
         width="308px"
@@ -63,7 +63,7 @@ export function MarkupTweets(props) {
         <div className={css.circle}>
           <img
             src={avatar ? avatar : defaultAvatar}
-            alt="avatar"
+            alt="user avatar"
             className={css.avatar}
             height="80px"
             width="80px"

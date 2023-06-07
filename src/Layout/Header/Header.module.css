@@ -4,7 +4,7 @@
 }
 
 .ulContainer {
-  width: 100vw;
+  width: 100%;
   gap: 5px;
 }
 
@@ -19,3 +19,6 @@
 .mr {
   margin-left: auto;
 }
+
+/* export const PRIMARY_COLOR = '#ebd8ff';
+export const SECONDARY_COLOR = '#5CD3A8'; */
